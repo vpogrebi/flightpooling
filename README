@@ -1,0 +1,57 @@
+Valeriy Pogrebitskiy's Quick-and-dirty Python test solutions
+
+Python Test
+===========
+
+1) 	Write a function that, given a list of numbers, returns its arithmetic 
+	average and its standard deviation.
+   
+	math_test.py
+	============ 
+	compute() function computes both numeric list's average and
+	standard deviation - as a dictionary containing 'avg' and 'std' key/value pairs.
+	This function computes standard deviation using following formula:
+   
+	std = sqrt(sum((x - mean)**2) / (n-1))  
+   
+	(Ref: http://www.ltcconline.net/greenl/courses/201/descstat/mean.htm)
+   
+	It uses generator expression (it can as well be using list comprehension, 
+	but for large lists generator expressions save memory)
+        
+
+2) 	Write a quick-sort for lists. What can you tell about its complexity?
+
+	qsort_test.py
+	=============
+	Implements quicksort using data comprehensions and randomized pivot.
+	In general, use of randomized pivot is not necessary. In fact, it
+	slows down performance when list is mostly unsorted, but... it significantly
+	improves performance when list is (mostly) sorted. Performance loss
+	for unsorted lists is very low - compared to performance gain for sorted lists
+	
+	IMPORTANT: since we perform data.pop() when taking a pivot, qsort() modifies
+	original data. To prevent this, I am using @preservedList decorator - that
+	executes qsort() but keeps original data unchanged 
+
+3) 	How would you implement binary trees in Python? Write a function that visits a 
+	binary tree in pre-order.
+	
+	btree_test.py
+	=============
+	This module implements two classes: Node and BTree. I have not provided *all*
+	of the usual BTree methods - only the ones important for this particular assignment:
+	insert() and preOrder(). preOrder() traverses all nodes of the BTree and prints
+	value of a Node itself followed by traversing left sub-tree, then right sub-tree
+	
+	
+Each of the 3 modules contains simple "doctest" tests.
+
+To run tests, execute:
+
+	python math_test.py -v
+	python qsort_test.py -v
+	python btree_test.py -v 
+
+I could have provided "unittest" script(s) instead, but for given level of 
+complexity - "doctest" works fine. Keep in mind that I have very good "unittest" experience ...
